@@ -1,15 +1,15 @@
-use yew::prelude::*;
 use crate::util::Color;
+use yew::prelude::*;
 
 /// # Link component
 /// Link component rendered as `<a/>` component. This link can contain
 /// any element.
-/// 
+///
 /// See [LinkProps] for a listing of properties.
-/// 
+///
 /// ## Example
 /// Example of link:
-/// 
+///
 /// ```rust
 /// use yew::prelude::*;
 /// use yew_bootstrap::component::Link;

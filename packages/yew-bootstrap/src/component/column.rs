@@ -3,9 +3,9 @@ use yew::prelude::*;
 
 /// # Column container
 /// Used with [crate::component::Row] to create grids
-/// 
+///
 /// See [crate::component::ColumnProps] for a listing of properties
-/// 
+///
 /// ## Example
 /// ```rust
 /// use yew::prelude::*;

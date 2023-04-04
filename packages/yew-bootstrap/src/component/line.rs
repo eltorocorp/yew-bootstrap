@@ -2,12 +2,12 @@ use crate::util::*;
 use yew::prelude::*;
 
 /// # Horizontal or vertical line
-/// 
+///
 /// See [LineProps] for a listing of properties.
-/// 
+///
 /// ## Example
 /// Example line:
-/// 
+///
 /// ```rust
 /// use yew::prelude::*;
 /// use yew_bootstrap::component::Line;

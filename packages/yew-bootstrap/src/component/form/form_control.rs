@@ -1,5 +1,5 @@
-use yew::prelude::*;
 use super::*;
+use yew::prelude::*;
 
 /// Validation type for a form control, with feedback message
 #[derive(Clone, PartialEq)]
@@ -11,7 +11,6 @@ pub enum FormControlValidation {
     /// Invalid validation with feedback message
     Invalid(AttrValue),
 }
-
 
 /// # Properties for a FormControl
 #[derive(Properties, Clone, PartialEq)]
@@ -98,10 +97,11 @@ pub struct FormControlProps {
     pub onclick: Callback<MouseEvent>,
 }
 
-
 /// Convert an option (Typically integer) to an AttrValue option
 fn convert_to_string_option<T>(value: &Option<T>) -> Option<AttrValue>
-where T: std::fmt::Display {
+where
+    T: std::fmt::Display,
+{
     value.as_ref().map(|v| AttrValue::from(v.to_string()))
 }
 
@@ -123,8 +123,8 @@ where T: std::fmt::Display {
 /// use yew_bootstrap::component::form::*;
 /// fn test() -> Html {
 ///   html! {
-///     <FormControl 
-///         id="input-text" 
+///     <FormControl
+///         id="input-text"
 ///         ctype={FormControlType::Text}
 ///         class="mb-3"
 ///         label="Text"
@@ -134,22 +134,22 @@ where T: std::fmt::Display {
 /// }
 /// ```
 ///
-/// Some input types need parameters for the `ctype` enum. Optional parameters use `Option` enums. 
+/// Some input types need parameters for the `ctype` enum. Optional parameters use `Option` enums.
 /// ```rust
 /// use yew::prelude::*;
 /// use yew_bootstrap::component::form::*;
 /// fn test() -> Html {
 ///   html! {
-///     <FormControl 
+///     <FormControl
 ///         id="input-number"
-///         ctype={ 
-///             FormControlType::Number { 
-///                 min: Some(10), 
+///         ctype={
+///             FormControlType::Number {
+///                 min: Some(10),
 ///                 max: Some(20)
-///             } 
+///             }
 ///         }
-///         class="mb-3" 
-///         label="Number in range 10-20" 
+///         class="mb-3"
+///         label="Number in range 10-20"
 ///         value="12"
 ///     />
 ///   }
@@ -164,17 +164,17 @@ where T: std::fmt::Display {
 /// use yew_bootstrap::component::form::*;
 /// fn test() -> Html {
 ///   html! {
-///     <FormControl 
+///     <FormControl
 ///         id="input-datetime2"
-///         ctype={ 
+///         ctype={
 ///             FormControlType::DatetimeMinMax {
 ///                 min: Some(AttrValue::from("2023-01-01T12:00")),
-///                 max: Some(AttrValue::from("2023-01-01T18:00")) 
-///             } 
+///                 max: Some(AttrValue::from("2023-01-01T18:00"))
+///             }
 ///         }
-///         class="mb-3" 
+///         class="mb-3"
 ///         label="Date and time (1st Jan 2023, 12:00 to 18:00)"
-///         value="2023-01-01T15:00" 
+///         value="2023-01-01T15:00"
 ///     />
 ///   }
 /// }
@@ -187,13 +187,13 @@ where T: std::fmt::Display {
 /// use yew_bootstrap::component::form::*;
 /// fn test() -> Html {
 ///   html! {
-///     <FormControl 
-///         id="input-select-feedback" 
-///         ctype={ FormControlType::Select} 
+///     <FormControl
+///         id="input-select-feedback"
+///         ctype={ FormControlType::Select}
 ///         class="mb-3"
 ///         label={ "Form control invalid" }
-///         validation={ 
-///             FormControlValidation::Invalid(AttrValue::from("Select an option")) 
+///         validation={
+///             FormControlValidation::Invalid(AttrValue::from("Select an option"))
 ///         }
 ///     >
 ///       <SelectOption key=0 label="Select an option" selected=true />
@@ -268,38 +268,55 @@ pub fn FormControl(props: &FormControlProps) -> Html {
     let label = match props.label.clone() {
         None => None,
         Some(text) => {
-            let class = if props.floating { None } else { Some("form-label") };
+            let class = if props.floating {
+                None
+            } else {
+                Some("form-label")
+            };
             Some(html! {
                 <label for={ props.id.clone() } class={ class }>{ text.clone() }</label>
             })
         }
     };
 
-    let help = props.help.as_ref().map(|text| html! {
-        <div class="form-text">{ text.clone() }</div>
+    let help = props.help.as_ref().map(|text| {
+        html! {
+            <div class="form-text">{ text.clone() }</div>
+        }
     });
 
     let (validation, validation_class) = match props.validation.clone() {
         FormControlValidation::None => (None, None),
         FormControlValidation::Valid(None) => (None, Some("is-valid")),
-        FormControlValidation::Valid(Some(text)) => (Some(html! {
-            <div class="valid-feedback"> { text.clone() }</div>
-        }), Some("is-valid")),
-        FormControlValidation::Invalid(text) => (Some(html! {
-            <div class="invalid-feedback"> { text.clone() }</div>
-        }), Some("is-invalid")),
+        FormControlValidation::Valid(Some(text)) => (
+            Some(html! {
+                <div class="valid-feedback"> { text.clone() }</div>
+            }),
+            Some("is-valid"),
+        ),
+        FormControlValidation::Invalid(text) => (
+            Some(html! {
+                <div class="invalid-feedback"> { text.clone() }</div>
+            }),
+            Some("is-invalid"),
+        ),
     };
 
     let pattern = match &props.ctype {
-        FormControlType::Email{ pattern } => pattern,
-        FormControlType::Url{ pattern } => pattern,
+        FormControlType::Email { pattern } => pattern,
+        FormControlType::Url { pattern } => pattern,
         _ => &None,
     };
 
     // Placeholder required when `floating` is set, assign to label
     let mut placeholder = props.placeholder.clone();
     if props.floating && placeholder.is_none() {
-        placeholder = Some(props.label.clone().expect("When floating is set, label cannot be None"));
+        placeholder = Some(
+            props
+                .label
+                .clone()
+                .expect("When floating is set, label cannot be None"),
+        );
     }
 
     match &props.ctype {
@@ -313,8 +330,11 @@ pub fn FormControl(props: &FormControlProps) -> Html {
 
             let cols_str = convert_to_string_option(cols);
             let rows_str = convert_to_string_option(rows);
-            let (label_before, label_after) =
-                if props.floating { (None, label) } else { (label, None) };
+            let (label_before, label_after) = if props.floating {
+                (None, label)
+            } else {
+                (label, None)
+            };
 
             html! {
                 <div class={ classes }>
@@ -338,7 +358,7 @@ pub fn FormControl(props: &FormControlProps) -> Html {
                     { validation }
                 </div>
             }
-        },
+        }
         FormControlType::Select => {
             let mut classes = classes!(props.class.clone());
             if props.floating {
@@ -347,18 +367,21 @@ pub fn FormControl(props: &FormControlProps) -> Html {
 
             let input_classes = classes!("form-select", validation_class);
 
-            let (label_before, label_after) =
-                if props.floating { (None, label) } else { (label, None) };
+            let (label_before, label_after) = if props.floating {
+                (None, label)
+            } else {
+                (label, None)
+            };
 
             html! {
                 <div class={ classes }>
                     { label_before }
                     <select
-                        class={ input_classes } 
+                        class={ input_classes }
                         id={ props.id.clone()}
                         name={ props.name.clone() }
                         disabled={ props.disabled }
-                        onchange={ props.onchange.clone() } 
+                        onchange={ props.onchange.clone() }
                         onclick={ props.onclick.clone() }
                         required={ props.required }
                     >
@@ -369,7 +392,7 @@ pub fn FormControl(props: &FormControlProps) -> Html {
                     { validation }
                 </div>
             }
-        },
+        }
         FormControlType::Checkbox | FormControlType::Radio => {
             let mut classes = classes!("form-check");
             classes.push(props.class.clone());
@@ -395,7 +418,7 @@ pub fn FormControl(props: &FormControlProps) -> Html {
                     { validation}
                 </div>
             }
-        },
+        }
         _ => {
             let mut min_str = None;
             let mut max_str = None;
@@ -405,25 +428,28 @@ pub fn FormControl(props: &FormControlProps) -> Html {
                 FormControlType::Number { min, max } => {
                     min_str = convert_to_string_option(min);
                     max_str = convert_to_string_option(max);
-                },
+                }
                 FormControlType::Range { min, max, step } => {
                     min_str = Some(AttrValue::from(min.to_string()));
                     max_str = Some(AttrValue::from(max.to_string()));
                     step_str = convert_to_string_option(step);
-                },
-                FormControlType::DateMinMax { min, max } |
-                FormControlType::DatetimeMinMax { min, max } |
-                FormControlType::TimeMinMax { min, max } => {
+                }
+                FormControlType::DateMinMax { min, max }
+                | FormControlType::DatetimeMinMax { min, max }
+                | FormControlType::TimeMinMax { min, max } => {
                     min_str = min.clone();
                     max_str = max.clone();
-                },
+                }
                 FormControlType::File { accept } => {
-                    let accept_vec : Vec<String> = accept.clone().iter().cloned().map(
-                        move |value| { value.to_string() }
-                    ).collect();
+                    let accept_vec: Vec<String> = accept
+                        .clone()
+                        .iter()
+                        .cloned()
+                        .map(move |value| value.to_string())
+                        .collect();
                     accept_str = Some(accept_vec.join(", "));
                 }
-                _ => ()
+                _ => (),
             }
 
             let mut classes = classes!(props.class.clone());
@@ -433,8 +459,11 @@ pub fn FormControl(props: &FormControlProps) -> Html {
 
             let input_classes = classes!("form-control", validation_class);
 
-            let (label_before, label_after) =
-                if props.floating { (None, label) } else { (label, None) };
+            let (label_before, label_after) = if props.floating {
+                (None, label)
+            } else {
+                (label, None)
+            };
 
             html! {
                 <div class={ classes }>

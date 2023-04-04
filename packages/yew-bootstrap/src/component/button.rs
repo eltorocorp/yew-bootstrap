@@ -15,16 +15,16 @@ impl Default for ButtonSize {
 }
 
 /// # Button component
-/// Button with various properties, including support for opening or closing a modal 
+/// Button with various properties, including support for opening or closing a modal
 /// dialog [crate::component::Modal].
-/// 
+///
 /// Buttons can be grouped in a [crate::component::ButtonGroup].
-/// 
+///
 /// See [ButtonProps] for a listing of properties.
-/// 
+///
 /// ## Example
 /// Example of a simple button:
-/// 
+///
 /// ```rust
 /// use yew::prelude::*;
 /// use yew_bootstrap::component::Button;
@@ -35,10 +35,10 @@ impl Default for ButtonSize {
 ///     }
 /// }
 /// ```
-/// 
-/// A button can be linked to a [crate::component::Modal] dialog or 
+///
+/// A button can be linked to a [crate::component::Modal] dialog or
 /// close this modal.
-/// 
+///
 /// ```rust
 /// use yew::prelude::*;
 /// use yew_bootstrap::component::Button;
@@ -171,6 +171,5 @@ impl Component for Button {
                 </button>
             }
         }
-
     }
 }

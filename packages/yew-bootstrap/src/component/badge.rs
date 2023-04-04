@@ -1,6 +1,6 @@
 use yew::prelude::*;
 
-use crate::util::{Color, ArrangeX, ArrangeY};
+use crate::util::{ArrangeX, ArrangeY, Color};
 
 /// # Badge component
 /// Used alongside [crate::util::Color] to create Badge components

@@ -17,9 +17,9 @@ impl Default for ModalSize {
 
 /// # Modal dialog
 /// Modal dialog, parent of [ModalHeader], [ModalBody] and [ModalFooter].
-/// 
+///
 /// See [ModalProps] for a listing of properties
-/// 
+///
 /// ## Example
 /// ```rust
 /// use yew::prelude::*;
@@ -40,25 +40,25 @@ impl Default for ModalSize {
 ///     }
 /// }
 /// ```
-pub struct Modal { }
+pub struct Modal {}
 
 /// # Header for a [Modal] dialog
 /// See [ModalHeaderProps] for a listing of properties
-pub struct ModalHeader { }
+pub struct ModalHeader {}
 
 /// # Body for a [Modal] dialog
 /// See [ModalBodyProps] for a listing of properties
-pub struct ModalBody { }
+pub struct ModalBody {}
 
 /// # Footer for a [Modal] dialog
 /// See [ModalFooterProps] for a listing of properties
-pub struct ModalFooter { }
+pub struct ModalFooter {}
 
 /// Properties for [ModalFooter]
 #[derive(Properties, Clone, PartialEq)]
 pub struct ModalFooterProps {
     #[prop_or_default]
-    pub children: Children
+    pub children: Children,
 }
 
 impl Component for ModalFooter {
@@ -116,7 +116,7 @@ impl Component for ModalHeader {
 #[derive(Properties, Clone, PartialEq)]
 pub struct ModalBodyProps {
     #[prop_or_default]
-    pub children: Children
+    pub children: Children,
 }
 
 impl Component for ModalBody {

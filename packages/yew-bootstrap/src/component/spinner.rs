@@ -45,7 +45,6 @@ pub struct SpinnerProps {
     #[prop_or_default]
     pub text: bool,
 
-
     /// Small size style, default false
     #[prop_or_default]
     pub small: bool,

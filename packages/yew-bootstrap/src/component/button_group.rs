@@ -3,12 +3,12 @@ use yew::prelude::*;
 /// # Button group
 /// [ButtonGroup] is used to group several [crate::component::Button] instances together.
 /// Buttons can be arranged vertically.
-/// 
+///
 /// See [ButtonGroupProps] for a listing of properties.
-/// 
+///
 /// ## Example
 /// Example of a simple button group:
-/// 
+///
 /// ```rust
 /// use yew::prelude::*;
 /// use yew_bootstrap::component::{Button, ButtonGroup};

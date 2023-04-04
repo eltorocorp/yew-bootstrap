@@ -1,12 +1,12 @@
-use yew::prelude::*;
 use super::Container;
 use crate::util::Dimension;
+use yew::prelude::*;
 
 /// # A singular dropdown item, child of [NavDropdown]
-/// Used as a child of [NavDropdown] to create a dropdown menu. 
-/// 
+/// Used as a child of [NavDropdown] to create a dropdown menu.
+///
 /// See [NavDropdownItemProps] for a listing of properties.
-pub struct NavDropdownItem { }
+pub struct NavDropdownItem {}
 
 /// # Properties for [NavDropdown]
 #[derive(Properties, Clone, PartialEq, Eq)]
@@ -40,7 +40,7 @@ impl Component for NavDropdownItem {
 
 /// A dropdown menu, child of [NavBar]. See [NavDropdownProps] for a listing of properties.
 #[derive(Clone, PartialEq, Eq)]
-pub struct NavDropdown { }
+pub struct NavDropdown {}
 
 /// Properties for [NavDropdown]
 #[derive(Properties, Clone, PartialEq)]
@@ -55,7 +55,7 @@ pub struct NavDropdownProps {
     pub expanded: bool,
     /// the text of the link with the dropdown-toggle class
     #[prop_or_default]
-    pub text: AttrValue
+    pub text: AttrValue,
 }
 
 impl Component for NavDropdown {
@@ -63,7 +63,7 @@ impl Component for NavDropdown {
     type Properties = NavDropdownProps;
 
     fn create(_ctx: &Context<Self>) -> Self {
-        Self { }
+        Self {}
     }
 
     fn view(&self, ctx: &Context<Self>) -> Html {
@@ -71,7 +71,7 @@ impl Component for NavDropdown {
 
         let expanded = String::from(match props.expanded {
             true => "true",
-            false => "false"
+            false => "false",
         });
 
         html! {
@@ -89,9 +89,9 @@ impl Component for NavDropdown {
 
 /// # Item of a [NavBar]
 /// This typically contains text inside a link
-/// 
+///
 /// Refer to [NavItemProperties] for a listing of properties
-pub struct NavItem { }
+pub struct NavItem {}
 
 /// Properties for NavItem
 #[derive(Properties, Clone, PartialEq)]
@@ -113,7 +113,7 @@ pub struct NavItemProperties {
     pub id: AttrValue,
     /// dropdown items
     #[prop_or_default]
-    pub children: Children
+    pub children: Children,
 }
 
 impl Component for NavItem {
@@ -149,7 +149,7 @@ impl Component for NavItem {
                                 </a>
                             </li>
                         }
-                    },
+                    }
                     false => {
                         html! {
                             <li class="nav-item">
@@ -160,65 +160,71 @@ impl Component for NavItem {
                         }
                     }
                 }
-            },
+            }
             false => {
                 html! {
                     <NavDropdown text={props.text.clone()} id={props.id.clone()}>
                         { for props.children.iter() }
                     </NavDropdown>
-                }                
+                }
             }
         }
     }
 }
 
 /// # Brand type for a [NavBar]
-/// 
+///
 /// This can contain a text, icon, image or combined (text and image)
 #[derive(Clone, PartialEq, Eq)]
 pub enum BrandType {
     /// Text with optional link
-    BrandSimple { 
-        text: AttrValue, url: Option<AttrValue> },
-    /// a brand icon is a bootstrap icon, requiring bootstrap-icons to be imported; 
+    BrandSimple {
+        text: AttrValue,
+        url: Option<AttrValue>,
+    },
+    /// a brand icon is a bootstrap icon, requiring bootstrap-icons to be imported;
     /// see [crate::util::include_cdn_icons]
-    BrandIcon { icon: AttrValue, text: AttrValue, url: Option<AttrValue> },
+    BrandIcon {
+        icon: AttrValue,
+        text: AttrValue,
+        url: Option<AttrValue>,
+    },
     /// Image with optional dimensions, link and descriptive text
-    BrandImage { 
+    BrandImage {
         /// browser-accessible url to the brand image
-        image_url: AttrValue, 
+        image_url: AttrValue,
         /// descriptive text for screen reader users
-        alt: AttrValue, 
-        dimension: Option<Dimension>
+        alt: AttrValue,
+        dimension: Option<Dimension>,
     },
     /// Combined image and text with URL
     BrandCombined {
-        text: AttrValue, 
+        text: AttrValue,
         /// hyperlink destination for brand text
         url: Option<AttrValue>,
         /// browser-accessible url to the brand image
-        image_url: AttrValue, 
+        image_url: AttrValue,
         /// descriptive text for screen reader users
-        alt: AttrValue, 
-        dimension: Option<Dimension>
-    }
+        alt: AttrValue,
+        dimension: Option<Dimension>,
+    },
 }
 
 /// # Navbar component, parent of [NavItem], [NavDropdown], and [NavDropdownItem]
 /// The navbar is a responsive horizontal menu bar that can contain links, dropdowns, and text.
 /// We have broken up this component into several sub-components to make it easier to use: [NavItem], [NavDropdown], and [NavDropdownItem].
 /// The brand property is set using the [BrandType] enum.
-/// 
+///
 /// See [NavBarProps] for more information on properties supported by this component.
 /// # Example
 /// ```rust
 /// use yew::prelude::*;
 /// use yew_bootstrap::component::{BrandType, NavBar, NavDropdownItem, NavItem};
-/// 
+///
 /// fn test() -> Html {
-///     let brand = BrandType::BrandSimple { 
-///         text: AttrValue::from("Yew Bootstrap"), 
-///         url: Some(AttrValue::from("https://yew.rs")) 
+///     let brand = BrandType::BrandSimple {
+///         text: AttrValue::from("Yew Bootstrap"),
+///         url: Some(AttrValue::from("https://yew.rs"))
 ///     };
 ///     html!{
 ///         <NavBar nav_id={"test-nav"} class="navbar-expand-lg navbar-light bg-light" brand={brand}>
@@ -230,7 +236,7 @@ pub enum BrandType {
 ///     }
 /// }
 /// ```
-pub struct NavBar { }
+pub struct NavBar {}
 
 /// Properties for [NavBar]
 #[derive(Properties, Clone, PartialEq)]
@@ -255,7 +261,7 @@ pub struct NavBarProps {
 
     /// Callback when brand is clicked
     #[prop_or_default]
-    pub brand_callback: Callback<MouseEvent>
+    pub brand_callback: Callback<MouseEvent>,
 }
 
 impl Component for NavBar {
@@ -270,12 +276,8 @@ impl Component for NavBar {
         let props = ctx.props();
 
         let expanded = String::from(match &props.expanded {
-            true => {
-                "true"
-            },
-            false => {
-                "false"
-            }
+            true => "true",
+            false => "false",
         });
 
         let mut classes = Classes::new();
@@ -283,77 +285,83 @@ impl Component for NavBar {
         classes.push(props.class.to_string());
 
         let brand = match &props.brand {
-            None => html!{},
-            Some(b) => {
-                match b {
-                    BrandType::BrandSimple{text, url} => {
-                        let url = match url { 
-                            Some(u) => u.clone(),
-                            None => AttrValue::from("#")
-                        };
+            None => html! {},
+            Some(b) => match b {
+                BrandType::BrandSimple { text, url } => {
+                    let url = match url {
+                        Some(u) => u.clone(),
+                        None => AttrValue::from("#"),
+                    };
 
-                        html!{
-                            <a class="navbar-brand" href={url} onclick={props.brand_callback.clone()}>
-                                {text.clone()}
-                            </a>
-                        }
-                    },
-                    BrandType::BrandIcon { text, icon, url } => {
-                        let url = match url { 
-                            Some(u) => u.clone(),
-                            None => AttrValue::from("#")
-                        };
+                    html! {
+                        <a class="navbar-brand" href={url} onclick={props.brand_callback.clone()}>
+                            {text.clone()}
+                        </a>
+                    }
+                }
+                BrandType::BrandIcon { text, icon, url } => {
+                    let url = match url {
+                        Some(u) => u.clone(),
+                        None => AttrValue::from("#"),
+                    };
+                    html! {
+                        <a class="navbar-brand" href={url} onclick={props.brand_callback.clone()}>
+                            <i class={format!("bi-{}", icon)}></i>
+                            {text.clone()}
+                        </a>
+                    }
+                }
+                BrandType::BrandImage {
+                    image_url,
+                    alt,
+                    dimension,
+                } => match dimension {
+                    None => {
                         html! {
-                            <a class="navbar-brand" href={url} onclick={props.brand_callback.clone()}>
-                                <i class={format!("bi-{}", icon)}></i>
-                                {text.clone()}
+                            <a class="navbar-brand" href={"#"} onclick={props.brand_callback.clone()}>
+                                <img src={image_url.clone()} alt={alt.clone()} class="d-inline-block align-text-top" />
                             </a>
                         }
                     }
-                    BrandType::BrandImage { image_url, alt, dimension } => {
-                        match dimension {
-                            None => {
-                                html! {
-                                    <a class="navbar-brand" href={"#"} onclick={props.brand_callback.clone()}>
-                                        <img src={image_url.clone()} alt={alt.clone()} class="d-inline-block align-text-top" />
-                                    </a>
-                                }
-                            }
-                            Some(Dimension{width, height}) => {
-                                html! {
-                                    <a class="navbar-brand" href={"#"} onclick={props.brand_callback.clone()}>
-                                        <img src={image_url.clone()} alt={alt.clone()} width={width.clone()} height={height.clone()} class="d-inline-block align-text-top" />
-                                    </a>
-                                }
-                            }
+                    Some(Dimension { width, height }) => {
+                        html! {
+                            <a class="navbar-brand" href={"#"} onclick={props.brand_callback.clone()}>
+                                <img src={image_url.clone()} alt={alt.clone()} width={width.clone()} height={height.clone()} class="d-inline-block align-text-top" />
+                            </a>
                         }
                     }
-                    BrandType::BrandCombined { text, url, image_url, alt, dimension } => {
-                        let url = match url { 
-                            Some(u) => u.clone(),
-                            None => AttrValue::from("#")
-                        };
-                        match dimension {
-                            None => {
-                                html! {
-                                    <a class="navbar-brand" href={url} onclick={props.brand_callback.clone()}>
-                                        <img src={image_url.clone()} alt={alt.clone()} class="d-inline-block align-text-top" />
-                                        {text.clone()}
-                                    </a>
-                                }
-                            },
-                            Some(Dimension{width, height}) => {
-                                html! {
-                                    <a class="navbar-brand" href={url} onclick={props.brand_callback.clone()}>
-                                        <img src={image_url.clone()} alt={alt.clone()} width={width.clone()} height={height.clone()} class="d-inline-block align-text-top" />
-                                        {text.clone()}
-                                    </a>
-                                }
+                },
+                BrandType::BrandCombined {
+                    text,
+                    url,
+                    image_url,
+                    alt,
+                    dimension,
+                } => {
+                    let url = match url {
+                        Some(u) => u.clone(),
+                        None => AttrValue::from("#"),
+                    };
+                    match dimension {
+                        None => {
+                            html! {
+                                <a class="navbar-brand" href={url} onclick={props.brand_callback.clone()}>
+                                    <img src={image_url.clone()} alt={alt.clone()} class="d-inline-block align-text-top" />
+                                    {text.clone()}
+                                </a>
+                            }
+                        }
+                        Some(Dimension { width, height }) => {
+                            html! {
+                                <a class="navbar-brand" href={url} onclick={props.brand_callback.clone()}>
+                                    <img src={image_url.clone()} alt={alt.clone()} width={width.clone()} height={height.clone()} class="d-inline-block align-text-top" />
+                                    {text.clone()}
+                                </a>
                             }
                         }
                     }
                 }
-            }
+            },
         };
 
         html! {

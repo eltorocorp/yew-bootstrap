@@ -30,7 +30,6 @@ pub struct SelectOptionProps {
     pub class: Classes,
 }
 
-
 /// # Option group
 ///
 /// Use to separate options inside a select. See [SelectOptgroupProps]
@@ -62,4 +61,3 @@ pub fn SelectOption(props: &SelectOptionProps) -> Html {
         </option>
     }
 }
-

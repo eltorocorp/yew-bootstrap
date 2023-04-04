@@ -95,4 +95,3 @@ impl fmt::Display for DisplaySize {
         }
     }
 }
-
