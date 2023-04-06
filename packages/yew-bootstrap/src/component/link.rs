@@ -41,6 +41,10 @@ pub struct LinkProps {
     #[prop_or_default]
     pub style: Option<Color>,
 
+    /// Href
+    #[prop_or_default]
+    pub href: String,
+
     /// Optional text for the link
     #[prop_or_default]
     pub text: String,
@@ -68,6 +72,7 @@ impl Component for Link {
         html! {
             <a
                 class={classes}
+                href={props.href.clone()}
             >
                 { &props.text }
                 { for props.children.iter() }
