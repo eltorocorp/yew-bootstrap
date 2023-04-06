@@ -255,6 +255,10 @@ pub struct NavBarProps {
     #[prop_or_default]
     pub expanded: bool,
 
+    /// Navbar is dark.
+    #[prop_or_default]
+    pub dark: bool,
+
     /// Brand type, see [BrandType]
     #[prop_or_default]
     pub brand: Option<BrandType>,
@@ -274,14 +278,25 @@ impl Component for NavBar {
 
     fn view(&self, ctx: &Context<Self>) -> Html {
         let props = ctx.props();
-
-        let expanded = String::from(match &props.expanded {
-            true => "true",
-            false => "false",
-        });
-
         let mut classes = Classes::new();
+
         classes.push("navbar");
+
+        match &props.dark {
+            true => {
+                classes.push("navbar-dark");
+                classes.push("bg-dark");
+            }
+            false => (),
+        };
+
+        match &props.expanded {
+            true => {
+                classes.push("navbar-expand");
+            }
+            false => (),
+        };
+
         classes.push(props.class.to_string());
 
         let brand = match &props.brand {
@@ -367,7 +382,7 @@ impl Component for NavBar {
         html! {
             <nav class={classes}>
                 <Container fluid=true>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target={format!("#{}", props.nav_id.clone())} aria-controls={props.nav_id.clone()} aria-expanded={expanded} aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target={format!("#{}", props.nav_id.clone())} aria-controls={props.nav_id.clone()} aria-expanded={props.expanded.to_string()} aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     {brand}
