@@ -6,22 +6,6 @@ use yew::prelude::*;
 ///
 /// See [CardGroupProps] for a listing of properties.
 ///
-/// ## Example
-/// Example of a simple card group:
-///
-/// ```rust
-/// use yew::prelude::*;
-/// use yew_bootstrap::component::{Card, CardGroup};
-/// use yew_bootstrap::util::Color;
-/// fn test() -> Html {
-///     html!{
-///         <CardGroup class={ "class" }>
-///             <Card style={Color::Primary} text={ "First button" }/>
-///             <Card style={Color::Secondary} text={ "Second button" }/>
-///         </CardGroup>
-///     }
-/// }
-/// ```
 pub struct CardGroup {}
 
 /// Properties for [CardGroup]
@@ -56,6 +40,54 @@ impl Component for CardGroup {
         let props = ctx.props();
         let mut classes = Classes::new();
         classes.push("card-group");
+        classes.push(props.class.clone());
+
+        html! {
+            <div
+                class={classes}
+                role={props.role.clone()}
+                aria-label={props.label.clone()}
+            >
+                { for props.children.iter() }
+            </div>
+        }
+    }
+}
+
+pub struct CardDeck {}
+
+/// Properties for [CardDeck]
+#[derive(Properties, Clone, PartialEq)]
+pub struct CardDeckProps {
+    /// CSS class
+    #[prop_or_default]
+    pub class: String,
+
+    /// Children for the group (Card instances)
+    #[prop_or_default]
+    pub children: Children,
+
+    /// Aria label used for assistive technologies
+    #[prop_or_default]
+    pub label: String,
+
+    /// Role, used for assistive technoligies to describe the purpose of the group.
+    #[prop_or_default]
+    pub role: String,
+}
+
+impl Component for CardDeck {
+    type Message = ();
+    type Properties = CardDeckProps;
+
+    fn create(_ctx: &Context<Self>) -> Self {
+        Self {}
+    }
+
+    fn view(&self, ctx: &Context<Self>) -> Html {
+        let props = ctx.props();
+        let mut classes = Classes::new();
+        classes.push("card-deck");
         classes.push(props.class.clone());
 
         html! {
