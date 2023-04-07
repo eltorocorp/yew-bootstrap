@@ -1,15 +1,14 @@
-
 use yew::prelude::*;
 
 /// # Card group
 /// [CardGroup] is used to group several [crate::component::Card] instances together.
 /// Cards can be arranged vertically.
-/// 
+///
 /// See [CardGroupProps] for a listing of properties.
-/// 
+///
 /// ## Example
 /// Example of a simple card group:
-/// 
+///
 /// ```rust
 /// use yew::prelude::*;
 /// use yew_bootstrap::component::{Card, CardGroup};
@@ -43,10 +42,6 @@ pub struct CardGroupProps {
     /// Role, used for assistive technoligies to describe the purpose of the group.
     #[prop_or_default]
     pub role: String,
-
-    /// If true, disposition is vertical (Default horizontal)
-    #[prop_or_default]
-    pub vertical: bool,
 }
 
 impl Component for CardGroup {
@@ -60,11 +55,7 @@ impl Component for CardGroup {
     fn view(&self, ctx: &Context<Self>) -> Html {
         let props = ctx.props();
         let mut classes = Classes::new();
-        if props.vertical {
-            classes.push("btn-group-vertical");
-        } else {
-            classes.push("btn-group");
-        }
+        classes.push("card-group");
         classes.push(props.class.clone());
 
         html! {
