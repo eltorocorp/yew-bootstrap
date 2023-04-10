@@ -13,6 +13,7 @@ mod line;
 mod link;
 mod modal;
 mod navbar;
+mod pagination;
 mod row;
 mod spinner;
 
@@ -30,5 +31,6 @@ pub use self::line::*;
 pub use self::link::*;
 pub use self::modal::*;
 pub use self::navbar::*;
+pub use self::pagination::*;
 pub use self::row::*;
 pub use self::spinner::*;
