@@ -1,6 +1,5 @@
 use yew::prelude::*;
 
-
 #[derive(Clone, PartialEq, Eq)]
 pub enum PaginationSize {
     Large,
@@ -31,7 +30,7 @@ pub struct Props {
 
 #[function_component(Pagination)]
 pub fn pagination(props: &Props) -> Html {
-    // main class(es) 
+    // main class(es)
     let mut classes = Classes::new();
     classes.push("pagination");
     match props.size {
@@ -42,11 +41,10 @@ pub fn pagination(props: &Props) -> Html {
     // page-item class(es)
     let mut page_item_classes = Classes::new();
     page_item_classes.push("page-item");
-    
+
     // page-link class(es)
     let mut page_link_classes = Classes::new();
     page_link_classes.push("page-link");
-
 
     html! {
         <nav>
