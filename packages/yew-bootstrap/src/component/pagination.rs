@@ -51,8 +51,8 @@ pub fn pagination(props: &Props) -> Html {
             <ul class={classes}>
             <li class={page_item_classes}>
               <a class={page_link_classes} href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-                <span class="sr-only">Previous</span>
+                <span aria-hidden="true">{"&laquo;"}</span>
+                <span class="sr-only">{"Previous"}</span>
               </a>
             </li>
             // child components
@@ -79,8 +79,8 @@ pub fn pagination(props: &Props) -> Html {
             }}
             <li class={page_item_classes}>
               <a class={page_link_classes} href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-                <span class="sr-only">Next</span>
+                <span aria-hidden="true">{"&raquo;"}</span>
+                <span class="sr-only">{"Next"}</span>
               </a>
             </li>
             </ul>
