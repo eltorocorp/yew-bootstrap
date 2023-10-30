@@ -80,7 +80,7 @@ impl Component for Spinner {
         html! {
             <div class={classes} role="status">
                 <span class="visually-hidden">
-                    {&props.text}
+                    {props.text}
                 </span>
                 { for props.children.iter() }
             </div>
